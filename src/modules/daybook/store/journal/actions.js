@@ -35,7 +35,17 @@ export const updateEntry = async ({ commit }, entry) => { // entry debe de ser u
 
 }
 
+export const createEntry = async ({ commit }, entry ) => {
+     
+    const { date, picture, text } = entry
+    const dataToSave = { date, picture, text }
 
-export const createEntry = async (/*{ commit }*/) => {
+    const { data } = await journalApi.post( `entries.json`, dataToSave )
+
+    dataToSave.id =data.name
+
+    commit('addEntry', dataToSave )
+
+    return data.name
 
 }
