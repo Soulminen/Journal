@@ -11,9 +11,6 @@
         </div>
     </div>
 
-
-
-
     <div v-else
         class="d-flex">
         <div class="col-4">
