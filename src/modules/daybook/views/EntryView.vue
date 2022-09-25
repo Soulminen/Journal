@@ -47,7 +47,7 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
-import { mapGetters } from 'vuex' // computed!!!
+import { mapGetters, mapActions } from 'vuex' // computed!!!
 
 import getDayMonthYear from '../helpers/getDayMonthYear'
 
@@ -85,6 +85,8 @@ export default {
     },
 
     methods: {
+        ...mapActions('journal', ['updateEntry']),
+
         loadEntry() {
             const entry = this.getEntryById( this.id )
             if ( !entry ) return this.$router.push({ name: 'no-entry' })
@@ -93,6 +95,8 @@ export default {
         },
         async saveEntry() {
             console.log('Guardando entrada')
+
+            this.updateEntry( this.entry )
         }
     },
 
