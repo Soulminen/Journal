@@ -10,6 +10,10 @@
             </div>
 
             <div>
+                <input type="file"
+                        @change="onSelectedImage">
+
+
                 <button 
                     v-if="entry.id"
                     class="btn btn-danger mx-2"
@@ -34,8 +38,14 @@
         </div>
 
 
-        <img 
+        <!-- <img 
             src="https://www.robertlandscapes.com/wp-content/uploads/2014/11/landscape-322100_1280.jpg" 
+            alt="entry-picture"
+            class="img-thumbnail"> -->
+
+        <img 
+            v-if="localImage"
+            src="localImage" 
             alt="entry-picture"
             class="img-thumbnail">
 
@@ -68,7 +78,9 @@ export default {
 
     data() {
         return {
-            entry: null
+            entry: null,
+            localImage: null,
+            file: null
         }
     },
 
@@ -145,6 +157,25 @@ export default {
 
                 Swal.fire('Eliminado','','success')
             }
+        },
+
+        onSelectedImage( event ) {
+            const file = event.target.files[0]
+            if ( !file ) {
+                this.localImage = null
+                this.file = null
+                return
+            } 
+
+            this.file = file
+
+            const fr = new FileReader()
+            fr.onload = () => this.localImage = fr.result
+            fr.readAsDataURL( file )
+        },
+
+        onSelectImage() {
+            
         }
     },
 
@@ -158,9 +189,6 @@ export default {
             this.loadEntry()
         }
     }
-
-
-
 }
 </script>
 
