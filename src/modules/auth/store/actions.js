@@ -14,7 +14,7 @@ export const createUser = async ({ commit }, user) => {
            
 
             delete user.password
-            commit('loginUser', { user, idToken, refreshToken })
+            commit('LoginUser', { user, idToken, refreshToken })
 
             return { ok: true }
 
