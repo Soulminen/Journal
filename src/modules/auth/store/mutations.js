@@ -4,30 +4,25 @@
 // }
 
 
+export const loginUser = ( state, { user, idToken, refreshToken }) => {
 
-
-export const LoginUser = ( state, { user, idToken, refreshToken }) => {
-
-
-
-    if( idToken ) {  
-        localStorage.setItem('idToken', idToken )
+    if ( idToken ) {
+        localStorage.setItem( 'idToken', idToken )
         state.idToken = idToken
     }
 
-    if( refreshToken ) {  
+    if ( refreshToken ) {
         localStorage.setItem( 'refreshToken', refreshToken )
         state.refreshToken = refreshToken
     }
 
     state.user   = user
     state.status = 'authenticated'
-
-
 }
 
-export const logout = (state) => {
 
+export const logout = (state) => {
+    
     state.user = null
     state.idToken = null
     state.refreshToken = null
